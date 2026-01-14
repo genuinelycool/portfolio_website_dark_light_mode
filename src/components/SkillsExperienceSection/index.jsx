@@ -1,3 +1,4 @@
+import experiences from "../../data/experiences";
 import SkillCard from "./SkillCard";
 import ExperienceItem from "./ExperienceItem";
 
@@ -33,7 +34,7 @@ const SkillsExperienceSection = () => {
       <h3 className="text-4xl font-bold text-center mb-16 text-blue-600 dark:text-blue-400">
         What I Do & Where I ve Been
       </h3>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-6xl max-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-6xl mx-auto">
         {/* Skills */}
         <div>
           <h4 className="text-2xl font-semibold mb-4">Skills</h4>
@@ -48,8 +49,16 @@ const SkillsExperienceSection = () => {
           </div>
         </div>
         {/* Experience Timeline */}
-        <div>
+        <div className="border-l-4 border-blue-600 dark:border-blue-400 pl-6 space-y-8">
           <h4 className="text-2xl font-semibold mb-4">Experience</h4>
+          {experiences.map((exp, idx) => (
+            <ExperienceItem
+              key={idx}
+              title={exp.title}
+              company={exp.company}
+              years={exp.years}
+            />
+          ))}
         </div>
       </div>
     </section>
