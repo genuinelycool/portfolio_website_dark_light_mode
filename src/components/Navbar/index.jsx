@@ -1,8 +1,11 @@
+import { useState } from "react";
 import { useTheme } from "../../context/ThemeProvider";
-import { Moon, Sun } from "lucide-react";
+import { Moon, Sun, Menu, X } from "lucide-react";
 
 const Navbar = () => {
   const { theme, toggleTheme } = useTheme();
+  const [menuOpen, setMenuOpen] = useState(false);
+  // const [menuOpen, setMenuOpen] = useState(true);
 
   const navLinks = [
     { label: "Home", target: "hero" },
@@ -36,7 +39,35 @@ const Navbar = () => {
           </button>
 
         </div>
+
+        {/* Mobile Menu Button */}
+        <button
+          className="md:hidden"
+          onClick={() => setMenuOpen((prev) => !prev)}
+        >
+          {menuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
       </div>
+
+      {/* Mobile Nav */}
+      {menuOpen && (
+        <div className="md:hidden flex flex-col items-start px-6 pb-4 space-y-4">
+          {navLinks.map(({ label, target }) => (
+            <a
+              key={label}
+              href={`#${target}`}
+              onClick={() => setMenuOpen(false)}  // close on click
+              className="transition hover:text-blue-500"
+            >
+              {label}
+            </a>
+          ))}
+          {/* Light/Dark Mode Toggle Button */}
+          <button onClick={toggleTheme}>
+            {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
+          </button>
+        </div>
+      )}
     </nav>
   );
 };
