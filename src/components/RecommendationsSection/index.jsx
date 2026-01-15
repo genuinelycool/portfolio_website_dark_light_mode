@@ -1,6 +1,7 @@
 import { useState } from "react";
 import testimonials from "../../data/testimonials";
 import TestimonialCard from "./TestimonialCard";
+import companyLogos from "../../data/companyLogos";
 import ArrowNavigation from "./ArrowNavigation";
 import CompanyLogo from "./CompanyLogo";
 
@@ -38,6 +39,15 @@ const RecommendationsSection = () => {
       />
 
       {/* Logos */}
+      <div className="flex flex-wrap justify-center gap-10 mt-16">
+        {companyLogos.map((logo, idx) => (
+          <CompanyLogo
+            key={idx}
+            logo={logo}
+            idx={idx}
+          />
+        ))}
+      </div>
 
     </section>
   );
