@@ -11,6 +11,14 @@ const RecommendationsSection = () => {
   // Get the currently selected testimonial
   const testimonial = testimonials[current];
 
+  // Function to go to the previous testimonial (loop to last if at beginning)
+  const prev = () =>
+    setCurrent((prev) => (prev === 0 ? testimonials.length - 1 : prev - 1));
+
+  // Function to go to the next testimonial (loop to first if at end)
+  const next = () =>
+    setCurrent((prev) => (prev === testimonials.length - 1 ? 0 : prev + 1));
+
   return (
     <section className="min-h-screen py-20 px-4 text-center bg-gray-100 dark:bg-gray-900">
       <h2 className="text-3xl font-semibold text-gray-800 dark:text-white">
@@ -24,6 +32,10 @@ const RecommendationsSection = () => {
       <TestimonialCard testimonial={testimonial} />
 
       {/* Navigation Arrows */}
+      <ArrowNavigation
+        prev={prev}
+        next={next}
+      />
 
       {/* Logos */}
 
