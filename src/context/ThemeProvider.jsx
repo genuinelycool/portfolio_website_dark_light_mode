@@ -4,9 +4,14 @@ const ThemeContext = createContext();
 
 export const useTheme = () => useContext(ThemeContext);
 
+// Read theme from localStorage or default to "light"
+const getInitialTheme = () =>
+  localStorage.getItem("theme") || "light";
+
 const ThemeProvider = ({ children }) => {
   // const [theme, setTheme] = useState("light");
-  const [theme, setTheme] = useState("dark");
+  // const [theme, setTheme] = useState("dark");
+  const [theme, setTheme] = useState(getInitialTheme());
 
   document.documentElement.classList.add(theme);
 
@@ -15,6 +20,8 @@ const ThemeProvider = ({ children }) => {
       const newTheme = prevTheme === "dark" ? "light" : "dark";
       document.documentElement.classList.remove("light", "dark");
       document.documentElement.classList.add(newTheme);
+      
+      localStorage.setItem("theme", newTheme);
       return newTheme;
     });
   };
